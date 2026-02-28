@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINOONCHAIN 1970 — Vino Tokenizado sobre Stellar</title>
+    <meta name="description" content="Tokenizamos botellas reales de vino boliviano en la blockchain de Stellar. Pre-venta, trazabilidad on-chain y redención por botellas físicas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --burgundy: #722F37;
+            --burgundy-dark: #5a252c;
+            --wine-night: #1B0A0E;
+            --gold: #D4AF37;
+            --gold-light: #e6c85a;
+            --cream: #F5F0EB;
+            --white: #FAFAFA;
+            --carbon: #2C2C2C;
+            --bg-dark: #0D0709;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(212, 175, 55, 0.15);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --max-width: 1200px;
+            --section-padding: 100px 0;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-color: var(--burgundy) var(--bg-dark);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--white);
+            background: var(--bg-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================
+           LABEL (uppercase tags)
+           ============================================ */
+        .label {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .label--gold { color: var(--gold); }
+        .label--burgundy { color: var(--burgundy); }
+        .label--white { color: rgba(255,255,255,0.6); }
+
+        /* ============================================
+           HEADINGS
+           ============================================ */
+        .heading-xl {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .heading-lg {
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 4.5vw, 52px);
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .heading-md {
+            font-family: var(--font-serif);
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn--primary {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        .btn--primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1.5px solid var(--gold);
+        }
+
+        .btn--outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn--sm {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 7, 9, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar__logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .navbar__logo span {
+            color: var(--gold);
+        }
+
+        .navbar__links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .navbar__links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .navbar__links a:hover {
+            color: var(--gold);
+        }
+
+        .navbar__menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .navbar__menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(114, 47, 55, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(114, 47, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .hero__particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero__particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float-particle 8s infinite;
+        }
+
+        @keyframes float-particle {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+
+        .hero__content {
+            max-width: 720px;
+        }
+
+        .hero__headline {
+            color: var(--white);
+        }
+
+        .hero__headline em {
+            font-style: normal;
+            color: var(--gold);
+        }
+
+        .hero__sub {
+            font-size: clamp(16px, 2vw, 19px);
+            color: rgba(245, 240, 235, 0.8);
+            max-width: 560px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero__ctas {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+        }
+
+        .hero__stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 680px;
+        }
+
+        .hero__stat {
+            padding: 20px 24px;
+            background: rgba(13, 7, 9, 0.8);
+            text-align: center;
+        }
+
+        .hero__stat-value {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .hero__stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+           SECTION BASE
+           ============================================ */
+        .section {
+            padding: var(--section-padding);
+        }
+
+        .section--dark {
+            background: var(--bg-dark);
+            color: var(--white);
+        }
+
+        .section--light {
+            background: var(--cream);
+            color: var(--carbon);
+        }
+
+        .section--burgundy {
+            background: var(--burgundy);
+            color: var(--white);
+        }
+
+        .section--gradient {
+            background: linear-gradient(180deg, var(--burgundy) 0%, var(--bg-dark) 100%);
+            color: var(--white);
+        }
+
+        .section__header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .section__header p {
+            font-size: 17px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* ============================================
+           PROBLEMA SECTION
+           ============================================ */
+        .problem__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .problem__col h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--burgundy);
+            margin-bottom: 16px;
+        }
+
+        .problem__col p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(44, 44, 44, 0.8);
+        }
+
+        .problem__cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .problem__card {
+            padding: 36px 28px;
+            background: var(--white);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(114, 47, 55, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .problem__card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(114, 47, 55, 0.1);
+        }
+
+        .problem__card-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .problem__card h4 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            color: var(--burgundy);
+            margin-bottom: 10px;
+        }
+
+        .problem__card p {
+            font-size: 14px;
+            color: rgba(44, 44, 44, 0.7);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           SOLUCION SECTION
+           ============================================ */
+        .solution__cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .solution__card {
+            padding: 40px 32px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .solution__card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .solution__card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .solution__card h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .solution__card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           COMO FUNCIONA (TIMELINE)
+           ============================================ */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--burgundy), var(--gold), var(--burgundy));
+        }
+
+        .timeline__step {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .timeline__step:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline__number {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--burgundy);
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline__content {
+            padding-top: 8px;
+        }
+
+        .timeline__content h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            color: var(--burgundy);
+            margin-bottom: 8px;
+        }
+
+        .timeline__content p {
+            font-size: 15px;
+            color: rgba(44, 44, 44, 0.8);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .timeline__tech {
+            font-size: 13px;
+            color: var(--burgundy);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           STATS SECTION
+           ============================================ */
+        .stats__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat__number {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .stat__label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+        }
+
+        .stats__footer {
+            text-align: center;
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           ORIGIN / ABOUT
+           ============================================ */
+        .origin__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .origin__text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(44, 44, 44, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .origin__facts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .origin__fact {
+            padding: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid rgba(114, 47, 55, 0.1);
+        }
+
+        .origin__fact-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--burgundy);
+            margin-bottom: 6px;
+        }
+
+        .origin__fact-value {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            color: var(--carbon);
+        }
+
+        .origin__image {
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--burgundy), var(--wine-night));
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .origin__image-placeholder {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            padding: 40px;
+        }
+
+        .origin__image-placeholder .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .origin__image-placeholder p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           TECH SECTION
+           ============================================ */
+        .tech__cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .tech__card {
+            padding: 36px 32px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tech__card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.35);
+        }
+
+        .tech__card-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .tech__card h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .tech__card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+        }
+
+        .tech__wallets {
+            text-align: center;
+        }
+
+        .tech__wallets p {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+        }
+
+        .tech__wallet-list {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+        }
+
+        .tech__wallet {
+            text-align: center;
+        }
+
+        .tech__wallet-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 20px;
+        }
+
+        .tech__wallet-name {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           ARCHITECTURE SECTION
+           ============================================ */
+        .arch__diagram {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 48px;
+            margin-bottom: 48px;
+            overflow-x: auto;
+        }
+
+        .arch__layers {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 600px;
+        }
+
+        .arch__layer {
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 24px;
+            background: var(--glass);
+        }
+
+        .arch__layer-title {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .arch__layer-items {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .arch__item {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+
+        .arch__item--highlight {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .arch__connector {
+            display: flex;
+            justify-content: center;
+            padding: 4px 0;
+            color: rgba(212, 175, 55, 0.4);
+            font-size: 18px;
+        }
+
+        .arch__stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .arch__stack-col h4 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .arch__stack-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .arch__stack-item:last-child {
+            border-bottom: none;
+        }
+
+        .arch__stack-tech {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .arch__stack-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* ============================================
+           BENEFITS SECTION
+           ============================================ */
+        .benefits__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .benefits__col {
+            padding: 40px;
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid rgba(114, 47, 55, 0.1);
+        }
+
+        .benefits__col h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: var(--burgundy);
+            margin-bottom: 24px;
+        }
+
+        .benefits__list {
+            list-style: none;
+        }
+
+        .benefits__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 15px;
+            color: rgba(44, 44, 44, 0.8);
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(114, 47, 55, 0.06);
+        }
+
+        .benefits__list li:last-child {
+            border-bottom: none;
+        }
+
+        .benefits__check {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ============================================
+           VISION / ROADMAP SECTION
+           ============================================ */
+        .vision__cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        .vision__card {
+            padding: 36px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .vision__card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.35);
+        }
+
+        .vision__card-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .vision__card h3 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .vision__card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .vision__footer {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .vision__footer p {
+            font-size: 17px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .cta .heading-xl {
+            color: var(--white);
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .cta__sub {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+
+        .cta__buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .cta__footnote {
+            font-size: 13px;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 64px 0 32px;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer__brand {
+            max-width: 280px;
+        }
+
+        .footer__logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer__logo span {
+            color: var(--gold);
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+        }
+
+        .footer__col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 12px;
+        }
+
+        .footer__col a {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+        }
+
+        .footer__col a:hover {
+            color: var(--gold);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer__copy {
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .footer__stellar {
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 968px) {
+            .navbar__links { display: none; }
+            .navbar__menu-btn { display: block; }
+
+            .navbar__links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(13, 7, 9, 0.98);
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            }
+
+            .hero__stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem__grid,
+            .origin__grid,
+            .benefits__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem__cards,
+            .solution__cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .tech__cards {
+                grid-template-columns: 1fr;
+            }
+
+            .vision__cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .arch__stack {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --section-padding: 72px 0;
+            }
+
+            .hero__stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .vision__cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .arch__diagram {
+                padding: 24px;
+            }
+
+            .tech__wallet-list {
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="navbar__logo">VINO<span>ON</span>CHAIN</a>
+            <ul class="navbar__links" id="navLinks">
+                <li><a href="#problema">Proyecto</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#contacto" class="btn btn--primary btn--sm">Unete a la Pre-Venta</a></li>
+            </ul>
+            <button class="navbar__menu-btn" id="menuBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__particles" id="particles"></div>
+        <div class="container">
+            <div class="hero__content">
+                <p class="label label--gold">REAL WORLD ASSETS &middot; STELLAR NETWORK</p>
+                <h1 class="heading-xl hero__headline">
+                    El Vino Ahora Vive<br>
+                    en la <em>Blockchain</em>
+                </h1>
+                <p class="hero__sub">
+                    Compra tokens que representan botellas reales de vino boliviano.
+                    Financia la produccion. Observa como crece su valor. Redime tu botella.
+                </p>
+                <div class="hero__ctas">
+                    <a href="#contacto" class="btn btn--primary">Explorar Pre-Venta</a>
+                    <a href="#como-funciona" class="btn btn--outline">Ver Como Funciona</a>
+                </div>
+                <div class="hero__stats">
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">Stellar</div>
+                        <div class="hero__stat-label">Red Blockchain</div>
+                    </div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">1:1</div>
+                        <div class="hero__stat-label">Token = Botella</div>
+                    </div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">Samaipata</div>
+                        <div class="hero__stat-label">Bolivia</div>
+                    </div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">Non-Custodial</div>
+                        <div class="hero__stat-label">Tu Wallet, Tus Keys</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PROBLEMA
+         ============================================ -->
+    <section class="section section--light" id="problema">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--burgundy">EL PROBLEMA</p>
+                <h2 class="heading-lg" style="color: var(--burgundy);">
+                    El 80% de los pequenos vinedos<br>
+                    no acceden a financiamiento temprano
+                </h2>
+            </div>
+            <div class="problem__grid">
+                <div class="problem__col reveal">
+                    <h3>Para el Productor</h3>
+                    <p>
+                        Los vinedos pequenos y medianos en Bolivia dependen de intermediarios,
+                        enfrentan costos financieros altos y no pueden vender su produccion
+                        antes de embotellar. Esto limita su crecimiento y los deja vulnerables
+                        ante cada temporada.
+                    </p>
+                </div>
+                <div class="problem__col reveal reveal-delay-1">
+                    <h3>Para el Consumidor</h3>
+                    <p>
+                        Los consumidores pagan el precio final sin beneficiarse de la
+                        apreciacion del producto. No pueden verificar el origen, el proceso
+                        de produccion ni la autenticidad de lo que compran. La cadena de
+                        valor es opaca.
+                    </p>
+                </div>
+            </div>
+            <div class="problem__cards">
+                <div class="problem__card reveal">
+                    <div class="problem__card-icon">&#x1F3E6;</div>
+                    <h4>Sin Financiamiento</h4>
+                    <p>Los vinedos no acceden a capital antes de la cosecha para financiar produccion</p>
+                </div>
+                <div class="problem__card reveal reveal-delay-1">
+                    <div class="problem__card-icon">&#x1F517;</div>
+                    <h4>Intermediarios</h4>
+                    <p>Multiples intermediarios encarecen el producto final hasta un 40%</p>
+                </div>
+                <div class="problem__card reveal reveal-delay-2">
+                    <div class="problem__card-icon">&#x2753;</div>
+                    <h4>Sin Transparencia</h4>
+                    <p>El consumidor no puede verificar origen, proceso ni autenticidad del vino</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SOLUCION
+         ============================================ -->
+    <section class="section section--dark" id="solucion">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--gold">LA SOLUCION</p>
+                <h2 class="heading-lg">
+                    Tokenizamos Cada Botella<br>
+                    en la Red Stellar
+                </h2>
+                <p>
+                    VINOONCHAIN convierte botellas reales de vino en activos digitales
+                    sobre la blockchain de Stellar. Cada token es respaldado 1:1 por
+                    una botella producida por Vinedo 1970 en Samaipata, Bolivia.
+                </p>
+            </div>
+            <div class="solution__cards">
+                <div class="solution__card reveal">
+                    <div class="solution__card-icon">&#x1FA99;</div>
+                    <h3>Pre-Venta Tokenizada</h3>
+                    <p>
+                        Compra tokens durante la fase de produccion a precio preferencial.
+                        Financia directamente al vinedo sin intermediarios.
+                        Pagos asegurados con escrow via Trustless Work.
+                    </p>
+                </div>
+                <div class="solution__card reveal reveal-delay-1">
+                    <div class="solution__card-icon">&#x1F50D;</div>
+                    <h3>Trazabilidad On-Chain</h3>
+                    <p>
+                        Cada botella tiene un QR que enlaza a su historial completo en
+                        Stellar: origen, produccion, transferencias y autenticidad
+                        verificable.
+                    </p>
+                </div>
+                <div class="solution__card reveal reveal-delay-2">
+                    <div class="solution__card-icon">&#x1F377;</div>
+                    <h3>Redencion Real</h3>
+                    <p>
+                        Cuando estes listo, canjea tu token por una botella fisica en el
+                        vinedo o puntos autorizados. El token se quema y sale de
+                        circulacion permanentemente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         COMO FUNCIONA
+         ============================================ -->
+    <section class="section section--light" id="como-funciona">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--burgundy">COMO FUNCIONA</p>
+                <h2 class="heading-lg" style="color: var(--burgundy);">
+                    De la Cepa a Tu Wallet<br>
+                    en 5 Pasos
+                </h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline__step reveal">
+                    <div class="timeline__number">1</div>
+                    <div class="timeline__content">
+                        <h3>El Vinedo Emite el Activo</h3>
+                        <p>Vinedo 1970 crea un activo nativo en Stellar. Cada token representa una botella real de vino en produccion con supply fijo e inmutable.</p>
+                        <span class="timeline__tech">Asset nativo Stellar &middot; Cuenta Issuer + Distributor</span>
+                    </div>
+                </div>
+                <div class="timeline__step reveal">
+                    <div class="timeline__number">2</div>
+                    <div class="timeline__content">
+                        <h3>Compra en Pre-Venta</h3>
+                        <p>Adquiere tokens a precio preferencial usando USDC. Tu compra financia directamente la produccion y embotellado sin intermediarios.</p>
+                        <span class="timeline__tech">Pago asegurado con Escrow &middot; Trustless Work SDK</span>
+                    </div>
+                </div>
+                <div class="timeline__step reveal">
+                    <div class="timeline__number">3</div>
+                    <div class="timeline__content">
+                        <h3>Tu Token Gana Valor</h3>
+                        <p>A medida que avanza la produccion, el valor de referencia de tu token aumenta por hitos completados y verificables on-chain.</p>
+                        <span class="timeline__tech">+20% al embotellar &middot; +10% al inicio de ventas oficiales</span>
+                    </div>
+                </div>
+                <div class="timeline__step reveal">
+                    <div class="timeline__number">4</div>
+                    <div class="timeline__content">
+                        <h3>Canjea Tu Botella</h3>
+                        <p>Presenta tu token en el vinedo o un punto autorizado. Recibes tu botella fisica y el token se quema, saliendo de circulacion permanentemente.</p>
+                        <span class="timeline__tech">Burn transaction verificable en Stellar</span>
+                    </div>
+                </div>
+                <div class="timeline__step reveal">
+                    <div class="timeline__number">5</div>
+                    <div class="timeline__content">
+                        <h3>Escanea y Verifica</h3>
+                        <p>Cada botella incluye un codigo QR. Escanealo para ver el historial completo: hash de transaccion, metadata de produccion y toda la cadena de transferencias.</p>
+                        <span class="timeline__tech">Stellar Explorer &middot; Metadata on-chain &middot; SEP-1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         STATS
+         ============================================ -->
+    <section class="section section--burgundy">
+        <div class="container">
+            <div class="section__header reveal">
+                <h2 class="heading-lg">Numeros que Hablan</h2>
+            </div>
+            <div class="stats__grid">
+                <div class="stat reveal">
+                    <div class="stat__number" data-count="1:1">1:1</div>
+                    <div class="stat__label">Cada Token = 1 Botella Real</div>
+                </div>
+                <div class="stat reveal reveal-delay-1">
+                    <div class="stat__number">+30%</div>
+                    <div class="stat__label">Apreciacion Potencial por Ciclo</div>
+                </div>
+                <div class="stat reveal reveal-delay-2">
+                    <div class="stat__number">0</div>
+                    <div class="stat__label">Intermediarios en la Cadena</div>
+                </div>
+                <div class="stat reveal reveal-delay-3">
+                    <div class="stat__number">100%</div>
+                    <div class="stat__label">Trazable desde la Cepa</div>
+                </div>
+            </div>
+            <p class="stats__footer reveal">
+                Cada transaccion es verificable en la blockchain de Stellar.
+                Sin custodia de terceros. Sin opacidad. Sin letra pequena.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ORIGEN / ABOUT
+         ============================================ -->
+    <section class="section section--light" id="origen">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--burgundy">EL ORIGEN</p>
+                <h2 class="heading-lg" style="color: var(--burgundy);">
+                    Vinedo 1970<br>Samaipata, Bolivia
+                </h2>
+            </div>
+            <div class="origin__grid">
+                <div class="origin__text reveal">
+                    <p>
+                        Enclavado en los valles de Samaipata, a 1.750 metros sobre el nivel
+                        del mar, Vinedo 1970 produce vino artesanal con uvas cultivadas en
+                        uno de los terroirs mas singulares de Sudamerica.
+                    </p>
+                    <p>
+                        Con decadas de tradicion vinicola, el vinedo combina metodos ancestrales
+                        con innovacion. VINOONCHAIN es el puente entre esa tradicion y la
+                        tecnologia blockchain, permitiendo que el mundo participe directamente
+                        en cada cosecha.
+                    </p>
+                    <p>
+                        Este proyecto nace para demostrar que la tokenizacion de activos reales
+                        no es solo teoria: es una herramienta concreta para financiar,
+                        transparentar y democratizar el acceso a productos con denominacion
+                        de origen.
+                    </p>
+                    <div class="origin__facts">
+                        <div class="origin__fact">
+                            <div class="origin__fact-label">Ubicacion</div>
+                            <div class="origin__fact-value">Samaipata, Santa Cruz</div>
+                        </div>
+                        <div class="origin__fact">
+                            <div class="origin__fact-label">Altitud</div>
+                            <div class="origin__fact-value">1.750 msnm</div>
+                        </div>
+                        <div class="origin__fact">
+                            <div class="origin__fact-label">Producto</div>
+                            <div class="origin__fact-value">Vino artesanal de altura</div>
+                        </div>
+                        <div class="origin__fact">
+                            <div class="origin__fact-label">Tradicion</div>
+                            <div class="origin__fact-value">Decadas de produccion</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="origin__image reveal reveal-delay-2">
+                    <div class="origin__image-placeholder">
+                        <div class="icon">&#x1F3D4;&#xFE0F;</div>
+                        <p>Vista panoramica de los valles de Samaipata<br>Vinedo 1970 &middot; 1.750 msnm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TECNOLOGIA
+         ============================================ -->
+    <section class="section section--dark" id="tecnologia">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--gold">TECNOLOGIA</p>
+                <h2 class="heading-lg">
+                    Construido Sobre Stellar.<br>
+                    Seguro por Diseno.
+                </h2>
+                <p>
+                    Usamos la infraestructura de Stellar Network porque ofrece
+                    transacciones rapidas, de bajo costo y con el estandar de
+                    seguridad que los activos reales requieren.
+                </p>
+            </div>
+            <div class="tech__cards">
+                <div class="tech__card reveal">
+                    <div class="tech__card-icon">&#x26A1;</div>
+                    <h3>Assets Nativos de Stellar</h3>
+                    <p>Los tokens son activos nativos de la red, no smart contracts complejos. Esto garantiza velocidad (~5s), bajo costo (~$0.00001) y compatibilidad con todo el ecosistema Stellar.</p>
+                </div>
+                <div class="tech__card reveal reveal-delay-1">
+                    <div class="tech__card-icon">&#x1F510;</div>
+                    <h3>Non-Custodial</h3>
+                    <p>Nunca tocamos tus llaves privadas. El backend construye la transaccion (XDR), pero solo tu firmas desde tu wallet personal. Tu wallet, tus keys, tus tokens.</p>
+                </div>
+                <div class="tech__card reveal reveal-delay-2">
+                    <div class="tech__card-icon">&#x1F6E1;&#xFE0F;</div>
+                    <h3>Escrow Verificable</h3>
+                    <p>Los pagos de pre-venta estan asegurados mediante Trustless Work SDK en Soroban. Fondos liberados por hitos verificables de produccion, no por confianza ciega.</p>
+                </div>
+                <div class="tech__card reveal reveal-delay-3">
+                    <div class="tech__card-icon">&#x1F4CB;</div>
+                    <h3>Metadata On-Chain</h3>
+                    <p>Cada activo incluye metadata vinculada: varietal, cosecha, lote y proceso de produccion. Todo verificable y publico siguiendo estandares SEP-1.</p>
+                </div>
+            </div>
+            <div class="tech__wallets reveal">
+                <p>Wallets Compatibles</p>
+                <div class="tech__wallet-list">
+                    <div class="tech__wallet">
+                        <div class="tech__wallet-icon">&#x1F4BB;</div>
+                        <div class="tech__wallet-name">Freighter</div>
+                    </div>
+                    <div class="tech__wallet">
+                        <div class="tech__wallet-icon">&#x1F4F1;</div>
+                        <div class="tech__wallet-name">Lobstr</div>
+                    </div>
+                    <div class="tech__wallet">
+                        <div class="tech__wallet-icon">&#x1F310;</div>
+                        <div class="tech__wallet-name">Albedo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ARQUITECTURA
+         ============================================ -->
+    <section class="section section--light" id="arquitectura">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--burgundy">ARQUITECTURA</p>
+                <h2 class="heading-lg" style="color: var(--burgundy);">
+                    Stack Tecnico
+                </h2>
+                <p style="color: rgba(44,44,44,0.7);">
+                    Arquitectura de 4 capas disenada para escalabilidad,
+                    seguridad y experiencia de usuario fluida.
+                </p>
+            </div>
+
+            <!-- Visual Architecture Diagram -->
+            <div class="arch__diagram reveal" style="background: rgba(114,47,55,0.06); border-color: rgba(114,47,55,0.15);">
+                <div class="arch__layers">
+                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                        <div class="arch__layer-title" style="color: var(--burgundy);">Client Layer</div>
+                        <div class="arch__layer-items">
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Next.js 15 (Landing + DApp)</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">TypeScript</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Tailwind CSS</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">GSAP Animations</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Freighter / Lobstr / Albedo</span>
+                        </div>
+                    </div>
+                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; HTTPS / REST &#x25BC;</div>
+                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                        <div class="arch__layer-title" style="color: var(--burgundy);">API Layer</div>
+                        <div class="arch__layer-items">
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Node.js 22 + Hono</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Transaction Builder (XDR)</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Escrow Orchestrator</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">QR Service</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Drizzle ORM</span>
+                        </div>
+                    </div>
+                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; Stellar SDK / Trustless Work &#x25BC;</div>
+                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                        <div class="arch__layer-title" style="color: var(--burgundy);">Blockchain Layer</div>
+                        <div class="arch__layer-items">
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2); font-weight: 700;">Stellar Network</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">VINO1970 Native Asset</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Soroban (Escrow)</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">SEP-1 stellar.toml</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Horizon API</span>
+                        </div>
+                    </div>
+                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC;</div>
+                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                        <div class="arch__layer-title" style="color: var(--burgundy);">Data Layer</div>
+                        <div class="arch__layer-items">
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">PostgreSQL (Neon)</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Upstash Redis</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Stellar Ledger (Source of Truth)</span>
+                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Cloudinary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stack Summary -->
+            <div class="arch__stack">
+                <div class="arch__stack-col reveal">
+                    <h4 style="color: var(--burgundy);">Frontend</h4>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Next.js 15</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">App Router + SSG/SSR</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">TypeScript 5</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Tipado seguro full-stack</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Tailwind CSS 4</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Utility-first styling</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">GSAP + Framer Motion</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Animaciones premium</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Zustand + TanStack Query</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Estado cliente + servidor</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch__stack-col reveal reveal-delay-1">
+                    <h4 style="color: var(--burgundy);">Backend</h4>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Node.js 22 + Hono</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">API ultra-rapida</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Stellar SDK</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Construccion de XDR</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Trustless Work SDK</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Escrow por milestones</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Drizzle ORM + Zod</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">DB type-safe + validacion</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">BullMQ</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Jobs asincronos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch__stack-col reveal reveal-delay-2">
+                    <h4 style="color: var(--burgundy);">Infraestructura</h4>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Vercel</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Frontend + CDN global</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Railway</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Backend hosting</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Neon PostgreSQL</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">DB serverless</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">GitHub Actions</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">CI/CD automatizado</div>
+                        </div>
+                    </div>
+                    <div class="arch__stack-item">
+                        <div>
+                            <div class="arch__stack-tech" style="color: var(--carbon);">Sentry</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Monitoreo de errores</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BENEFICIOS
+         ============================================ -->
+    <section class="section section--light" id="beneficios" style="background: #EDE8E3;">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--burgundy">BENEFICIOS</p>
+                <h2 class="heading-lg" style="color: var(--burgundy);">Ganan Todos</h2>
+            </div>
+            <div class="benefits__grid">
+                <div class="benefits__col reveal">
+                    <h3>Para el Productor</h3>
+                    <ul class="benefits__list">
+                        <li><span class="benefits__check">&#x2726;</span> Financiamiento antes de la cosecha, sin deuda</li>
+                        <li><span class="benefits__check">&#x2726;</span> Eliminacion de intermediarios en la cadena</li>
+                        <li><span class="benefits__check">&#x2726;</span> Relacion directa con el consumidor final</li>
+                        <li><span class="benefits__check">&#x2726;</span> Promocion internacional del vino boliviano</li>
+                        <li><span class="benefits__check">&#x2726;</span> Datos reales de demanda antes de producir</li>
+                    </ul>
+                </div>
+                <div class="benefits__col reveal reveal-delay-1">
+                    <h3>Para el Comprador</h3>
+                    <ul class="benefits__list">
+                        <li><span class="benefits__check">&#x2726;</span> Precio preferencial en pre-venta</li>
+                        <li><span class="benefits__check">&#x2726;</span> Apreciacion de valor por hitos de produccion</li>
+                        <li><span class="benefits__check">&#x2726;</span> Garantia de autenticidad y trazabilidad total</li>
+                        <li><span class="benefits__check">&#x2726;</span> Redencion por producto fisico real</li>
+                        <li><span class="benefits__check">&#x2726;</span> Participacion directa en la cadena de valor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         VISION / ESCALABILIDAD
+         ============================================ -->
+    <section class="section section--dark" id="vision">
+        <div class="container">
+            <div class="section__header reveal">
+                <p class="label label--gold">VISION</p>
+                <h2 class="heading-lg">Mas Alla del Vino</h2>
+                <p>
+                    El modelo de VINOONCHAIN es replicable. Cualquier producto con
+                    denominacion de origen puede beneficiarse de la tokenizacion.
+                </p>
+            </div>
+            <div class="vision__cards">
+                <div class="vision__card reveal">
+                    <div class="vision__card-icon">&#x2615;</div>
+                    <h3>Cafe de Especialidad</h3>
+                    <p>Yungas, Bolivia</p>
+                </div>
+                <div class="vision__card reveal reveal-delay-1">
+                    <div class="vision__card-icon">&#x1F36B;</div>
+                    <h3>Cacao Organico</h3>
+                    <p>Alto Beni, Bolivia</p>
+                </div>
+                <div class="vision__card reveal reveal-delay-2">
+                    <div class="vision__card-icon">&#x1FAD2;</div>
+                    <h3>Aceite de Oliva</h3>
+                    <p>Valles crucenos</p>
+                </div>
+                <div class="vision__card reveal reveal-delay-3">
+                    <div class="vision__card-icon">&#x1F33F;</div>
+                    <h3>Productos con D.O.</h3>
+                    <p>Cualquier origen verificable</p>
+                </div>
+            </div>
+            <div class="vision__footer reveal">
+                <p>
+                    VINOONCHAIN es una infraestructura, no solo un producto.
+                    Estamos construyendo el puente entre los productos reales
+                    de Latinoamerica y la economia digital global.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA FINAL
+         ============================================ -->
+    <section class="section section--gradient cta" id="contacto">
+        <div class="container">
+            <div class="reveal">
+                <p class="label label--gold">PRE-VENTA</p>
+                <h2 class="heading-xl">
+                    Se Parte de la Primera<br>
+                    Cosecha Tokenizada de Bolivia
+                </h2>
+                <p class="cta__sub">
+                    La pre-venta tiene cupo limitado. Cada token es una botella real,
+                    y cada cosecha es unica.
+                </p>
+                <div class="cta__buttons">
+                    <a href="#" class="btn btn--primary">Reservar Mis Tokens</a>
+                    <a href="#" class="btn btn--outline">Hablar con el Equipo</a>
+                </div>
+                <p class="cta__footnote">
+                    Proyecto desarrollado en el marco del Bootcamp Stellar &middot; Hackathon Dorahacks
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">VINO<span>ON</span>CHAIN</div>
+                    <p>
+                        Tokenizacion de activos reales para vino artesanal boliviano.
+                        Construido sobre Stellar Network.
+                    </p>
+                </div>
+                <div class="footer__col">
+                    <h4>Proyecto</h4>
+                    <ul>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#beneficios">Beneficios</a></li>
+                        <li><a href="#tecnologia">Tecnologia</a></li>
+                        <li><a href="#vision">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Whitepaper</a></li>
+                        <li><a href="#">Documentacion</a></li>
+                        <li><a href="#">Stellar Network</a></li>
+                        <li><a href="#">Trustless Work</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Comunidad</h4>
+                    <ul>
+                        <li><a href="#">Twitter / X</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copy">&copy; 2025 VINOONCHAIN 1970 &middot; Samaipata, Bolivia</p>
+                <p class="footer__stellar">Construido sobre Stellar Network</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // ---- Navbar scroll effect ----
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ---- Mobile menu toggle ----
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ---- Scroll reveal animations ----
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ---- Floating particles in hero ----
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'hero__particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+            particle.style.width = (2 + Math.random() * 3) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        // ---- Smooth scroll for anchor links ----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
