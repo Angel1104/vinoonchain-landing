@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VINOONCHAIN 1970 — Vino Tokenizado sobre Stellar</title>
-    <meta name="description" content="Tokenizamos botellas reales de vino boliviano en la blockchain de Stellar. Pre-venta, trazabilidad on-chain y redención por botellas físicas.">
+    <meta name="description"
+        content="Tokenizamos botellas reales de vino boliviano en la blockchain de Stellar. Pre-venta, trazabilidad on-chain y redención por botellas físicas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         /* ============================================
            CSS CUSTOM PROPERTIES
@@ -33,7 +37,9 @@
         /* ============================================
            RESET & BASE
            ============================================ */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -84,9 +90,17 @@
             display: inline-block;
         }
 
-        .label--gold { color: var(--gold); }
-        .label--burgundy { color: var(--burgundy); }
-        .label--white { color: rgba(255,255,255,0.6); }
+        .label--gold {
+            color: var(--gold);
+        }
+
+        .label--burgundy {
+            color: var(--burgundy);
+        }
+
+        .label--white {
+            color: rgba(255, 255, 255, 0.6);
+        }
 
         /* ============================================
            HEADINGS
@@ -208,7 +222,7 @@
         .navbar__links a {
             font-size: 14px;
             font-weight: 500;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             transition: color 0.3s;
             letter-spacing: 0.3px;
         }
@@ -272,10 +286,23 @@
         }
 
         @keyframes float-particle {
-            0% { opacity: 0; transform: translateY(100vh) scale(0); }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(1);
+            }
         }
 
         .hero .container {
@@ -317,7 +344,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             overflow: hidden;
             max-width: 680px;
@@ -340,7 +367,7 @@
 
         .hero__stat-label {
             font-size: 11px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             letter-spacing: 0.5px;
         }
 
@@ -481,7 +508,7 @@
 
         .solution__card p {
             font-size: 15px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
         }
 
@@ -584,14 +611,14 @@
 
         .stat__label {
             font-size: 14px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.5;
         }
 
         .stats__footer {
             text-align: center;
             font-size: 16px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             max-width: 500px;
             margin: 0 auto;
             line-height: 1.7;
@@ -656,7 +683,7 @@
 
         .origin__image-placeholder {
             text-align: center;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             padding: 40px;
         }
 
@@ -708,7 +735,7 @@
 
         .tech__card p {
             font-size: 14px;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
             line-height: 1.7;
         }
 
@@ -720,7 +747,7 @@
             font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             margin-bottom: 16px;
         }
 
@@ -749,7 +776,7 @@
 
         .tech__wallet-name {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
         }
 
@@ -757,7 +784,7 @@
            ARCHITECTURE SECTION
            ============================================ */
         .arch__diagram {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 48px;
@@ -797,11 +824,11 @@
 
         .arch__item {
             padding: 12px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             font-size: 13px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
         }
 
@@ -836,7 +863,7 @@
             align-items: center;
             gap: 12px;
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .arch__stack-item:last-child {
@@ -851,7 +878,7 @@
 
         .arch__stack-desc {
             font-size: 12px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(255, 255, 255, 0.45);
         }
 
         /* ============================================
@@ -942,7 +969,7 @@
 
         .vision__card p {
             font-size: 13px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .vision__footer {
@@ -953,7 +980,7 @@
 
         .vision__footer p {
             font-size: 17px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
             font-style: italic;
         }
@@ -974,7 +1001,7 @@
 
         .cta__sub {
             font-size: 18px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             max-width: 500px;
             margin: 0 auto 48px;
             line-height: 1.7;
@@ -990,7 +1017,7 @@
 
         .cta__footnote {
             font-size: 13px;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255, 255, 255, 0.35);
             letter-spacing: 0.5px;
         }
 
@@ -999,7 +1026,7 @@
            ============================================ */
         .footer {
             background: var(--bg-dark);
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             padding: 64px 0 32px;
         }
 
@@ -1028,7 +1055,7 @@
 
         .footer__brand p {
             font-size: 14px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             line-height: 1.7;
         }
 
@@ -1037,7 +1064,7 @@
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 20px;
         }
 
@@ -1051,7 +1078,7 @@
 
         .footer__col a {
             font-size: 14px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             transition: color 0.3s;
         }
 
@@ -1060,7 +1087,7 @@
         }
 
         .footer__bottom {
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             padding-top: 24px;
             display: flex;
             justify-content: space-between;
@@ -1069,12 +1096,12 @@
 
         .footer__copy {
             font-size: 13px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .footer__stellar {
             font-size: 13px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* ============================================
@@ -1091,17 +1118,33 @@
             transform: translateY(0);
         }
 
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 968px) {
-            .navbar__links { display: none; }
-            .navbar__menu-btn { display: block; }
+            .navbar__links {
+                display: none;
+            }
+
+            .navbar__menu-btn {
+                display: block;
+            }
 
             .navbar__links.active {
                 display: flex;
@@ -1187,6 +1230,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- ============================================
@@ -1261,7 +1305,7 @@
             <div class="section__header reveal">
                 <p class="label label--burgundy">EL PROBLEMA</p>
                 <h2 class="heading-lg" style="color: var(--burgundy);">
-                    El 80% de los pequenos vinedos<br>
+                    El 80% de los pequeños vinedos<br>
                     no acceden a financiamiento temprano
                 </h2>
             </div>
@@ -1269,7 +1313,7 @@
                 <div class="problem__col reveal">
                     <h3>Para el Productor</h3>
                     <p>
-                        Los vinedos pequenos y medianos en Bolivia dependen de intermediarios,
+                        Los vinedos pequeños y medianos en Bolivia dependen de intermediarios,
                         enfrentan costos financieros altos y no pueden vender su produccion
                         antes de embotellar. Esto limita su crecimiento y los deja vulnerables
                         ante cada temporada.
@@ -1371,7 +1415,8 @@
                     <div class="timeline__number">1</div>
                     <div class="timeline__content">
                         <h3>El Vinedo Emite el Activo</h3>
-                        <p>Vinedo 1970 crea un activo nativo en Stellar. Cada token representa una botella real de vino en produccion con supply fijo e inmutable.</p>
+                        <p>Vinedo 1970 crea un activo nativo en Stellar. Cada token representa una botella real de vino
+                            en produccion con supply fijo e inmutable.</p>
                         <span class="timeline__tech">Asset nativo Stellar &middot; Cuenta Issuer + Distributor</span>
                     </div>
                 </div>
@@ -1379,7 +1424,8 @@
                     <div class="timeline__number">2</div>
                     <div class="timeline__content">
                         <h3>Compra en Pre-Venta</h3>
-                        <p>Adquiere tokens a precio preferencial usando USDC. Tu compra financia directamente la produccion y embotellado sin intermediarios.</p>
+                        <p>Adquiere tokens a precio preferencial usando USDC. Tu compra financia directamente la
+                            produccion y embotellado sin intermediarios.</p>
                         <span class="timeline__tech">Pago asegurado con Escrow &middot; Trustless Work SDK</span>
                     </div>
                 </div>
@@ -1387,15 +1433,18 @@
                     <div class="timeline__number">3</div>
                     <div class="timeline__content">
                         <h3>Tu Token Gana Valor</h3>
-                        <p>A medida que avanza la produccion, el valor de referencia de tu token aumenta por hitos completados y verificables on-chain.</p>
-                        <span class="timeline__tech">+20% al embotellar &middot; +10% al inicio de ventas oficiales</span>
+                        <p>A medida que avanza la produccion, el valor de referencia de tu token aumenta por hitos
+                            completados y verificables on-chain.</p>
+                        <span class="timeline__tech">+20% al embotellar &middot; +10% al inicio de ventas
+                            oficiales</span>
                     </div>
                 </div>
                 <div class="timeline__step reveal">
                     <div class="timeline__number">4</div>
                     <div class="timeline__content">
                         <h3>Canjea Tu Botella</h3>
-                        <p>Presenta tu token en el vinedo o un punto autorizado. Recibes tu botella fisica y el token se quema, saliendo de circulacion permanentemente.</p>
+                        <p>Presenta tu token en el vinedo o un punto autorizado. Recibes tu botella fisica y el token se
+                            quema, saliendo de circulacion permanentemente.</p>
                         <span class="timeline__tech">Burn transaction verificable en Stellar</span>
                     </div>
                 </div>
@@ -1403,7 +1452,8 @@
                     <div class="timeline__number">5</div>
                     <div class="timeline__content">
                         <h3>Escanea y Verifica</h3>
-                        <p>Cada botella incluye un codigo QR. Escanealo para ver el historial completo: hash de transaccion, metadata de produccion y toda la cadena de transferencias.</p>
+                        <p>Cada botella incluye un codigo QR. Escanealo para ver el historial completo: hash de
+                            transaccion, metadata de produccion y toda la cadena de transferencias.</p>
                         <span class="timeline__tech">Stellar Explorer &middot; Metadata on-chain &middot; SEP-1</span>
                     </div>
                 </div>
@@ -1524,22 +1574,26 @@
                 <div class="tech__card reveal">
                     <div class="tech__card-icon">&#x26A1;</div>
                     <h3>Assets Nativos de Stellar</h3>
-                    <p>Los tokens son activos nativos de la red, no smart contracts complejos. Esto garantiza velocidad (~5s), bajo costo (~$0.00001) y compatibilidad con todo el ecosistema Stellar.</p>
+                    <p>Los tokens son activos nativos de la red, no smart contracts complejos. Esto garantiza velocidad
+                        (~5s), bajo costo (~$0.00001) y compatibilidad con todo el ecosistema Stellar.</p>
                 </div>
                 <div class="tech__card reveal reveal-delay-1">
                     <div class="tech__card-icon">&#x1F510;</div>
                     <h3>Non-Custodial</h3>
-                    <p>Nunca tocamos tus llaves privadas. El backend construye la transaccion (XDR), pero solo tu firmas desde tu wallet personal. Tu wallet, tus keys, tus tokens.</p>
+                    <p>Nunca tocamos tus llaves privadas. El backend construye la transaccion (XDR), pero solo tu firmas
+                        desde tu wallet personal. Tu wallet, tus keys, tus tokens.</p>
                 </div>
                 <div class="tech__card reveal reveal-delay-2">
                     <div class="tech__card-icon">&#x1F6E1;&#xFE0F;</div>
                     <h3>Escrow Verificable</h3>
-                    <p>Los pagos de pre-venta estan asegurados mediante Trustless Work SDK en Soroban. Fondos liberados por hitos verificables de produccion, no por confianza ciega.</p>
+                    <p>Los pagos de pre-venta estan asegurados mediante Trustless Work SDK en Soroban. Fondos liberados
+                        por hitos verificables de produccion, no por confianza ciega.</p>
                 </div>
                 <div class="tech__card reveal reveal-delay-3">
                     <div class="tech__card-icon">&#x1F4CB;</div>
                     <h3>Metadata On-Chain</h3>
-                    <p>Cada activo incluye metadata vinculada: varietal, cosecha, lote y proceso de produccion. Todo verificable y publico siguiendo estandares SEP-1.</p>
+                    <p>Cada activo incluye metadata vinculada: varietal, cosecha, lote y proceso de produccion. Todo
+                        verificable y publico siguiendo estandares SEP-1.</p>
                 </div>
             </div>
             <div class="tech__wallets reveal">
@@ -1579,48 +1633,86 @@
             </div>
 
             <!-- Visual Architecture Diagram -->
-            <div class="arch__diagram reveal" style="background: rgba(114,47,55,0.06); border-color: rgba(114,47,55,0.15);">
+            <div class="arch__diagram reveal"
+                style="background: rgba(114,47,55,0.06); border-color: rgba(114,47,55,0.15);">
                 <div class="arch__layers">
-                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                    <div class="arch__layer"
+                        style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
                         <div class="arch__layer-title" style="color: var(--burgundy);">Client Layer</div>
                         <div class="arch__layer-items">
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Next.js 15 (Landing + DApp)</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">TypeScript</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Tailwind CSS</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">GSAP Animations</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Freighter / Lobstr / Albedo</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Next.js 15 (Landing +
+                                DApp)</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">TypeScript</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Tailwind CSS</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">GSAP
+                                Animations</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Freighter / Lobstr /
+                                Albedo</span>
                         </div>
                     </div>
-                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; HTTPS / REST &#x25BC;</div>
-                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; HTTPS / REST &#x25BC;
+                    </div>
+                    <div class="arch__layer"
+                        style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
                         <div class="arch__layer-title" style="color: var(--burgundy);">API Layer</div>
                         <div class="arch__layer-items">
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Node.js 22 + Hono</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Transaction Builder (XDR)</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Escrow Orchestrator</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">QR Service</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Drizzle ORM</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Node.js 22 +
+                                Hono</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Transaction Builder
+                                (XDR)</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Escrow
+                                Orchestrator</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">QR Service</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Drizzle ORM</span>
                         </div>
                     </div>
-                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; Stellar SDK / Trustless Work &#x25BC;</div>
-                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                    <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC; Stellar SDK / Trustless
+                        Work &#x25BC;</div>
+                    <div class="arch__layer"
+                        style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
                         <div class="arch__layer-title" style="color: var(--burgundy);">Blockchain Layer</div>
                         <div class="arch__layer-items">
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2); font-weight: 700;">Stellar Network</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">VINO1970 Native Asset</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Soroban (Escrow)</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">SEP-1 stellar.toml</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Horizon API</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2); font-weight: 700;">Stellar
+                                Network</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">VINO1970 Native
+                                Asset</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Soroban
+                                (Escrow)</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">SEP-1
+                                stellar.toml</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Horizon API</span>
                         </div>
                     </div>
                     <div class="arch__connector" style="color: rgba(114,47,55,0.3);">&#x25BC;</div>
-                    <div class="arch__layer" style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
+                    <div class="arch__layer"
+                        style="border-color: rgba(114,47,55,0.15); background: rgba(114,47,55,0.05);">
                         <div class="arch__layer-title" style="color: var(--burgundy);">Data Layer</div>
                         <div class="arch__layer-items">
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">PostgreSQL (Neon)</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Upstash Redis</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Stellar Ledger (Source of Truth)</span>
-                            <span class="arch__item" style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Cloudinary</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">PostgreSQL
+                                (Neon)</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Upstash Redis</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Stellar Ledger
+                                (Source of Truth)</span>
+                            <span class="arch__item"
+                                style="color: var(--burgundy); border-color: rgba(114,47,55,0.2);">Cloudinary</span>
                         </div>
                     </div>
                 </div>
@@ -1639,7 +1731,8 @@
                     <div class="arch__stack-item">
                         <div>
                             <div class="arch__stack-tech" style="color: var(--carbon);">TypeScript 5</div>
-                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Tipado seguro full-stack</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Tipado seguro full-stack
+                            </div>
                         </div>
                     </div>
                     <div class="arch__stack-item">
@@ -1657,7 +1750,8 @@
                     <div class="arch__stack-item">
                         <div>
                             <div class="arch__stack-tech" style="color: var(--carbon);">Zustand + TanStack Query</div>
-                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Estado cliente + servidor</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">Estado cliente + servidor
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1684,7 +1778,8 @@
                     <div class="arch__stack-item">
                         <div>
                             <div class="arch__stack-tech" style="color: var(--carbon);">Drizzle ORM + Zod</div>
-                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">DB type-safe + validacion</div>
+                            <div class="arch__stack-desc" style="color: rgba(44,44,44,0.5);">DB type-safe + validacion
+                            </div>
                         </div>
                     </div>
                     <div class="arch__stack-item">
@@ -1744,10 +1839,13 @@
                 <div class="benefits__col reveal">
                     <h3>Para el Productor</h3>
                     <ul class="benefits__list">
-                        <li><span class="benefits__check">&#x2726;</span> Financiamiento antes de la cosecha, sin deuda</li>
-                        <li><span class="benefits__check">&#x2726;</span> Eliminacion de intermediarios en la cadena</li>
+                        <li><span class="benefits__check">&#x2726;</span> Financiamiento antes de la cosecha, sin deuda
+                        </li>
+                        <li><span class="benefits__check">&#x2726;</span> Eliminacion de intermediarios en la cadena
+                        </li>
                         <li><span class="benefits__check">&#x2726;</span> Relacion directa con el consumidor final</li>
-                        <li><span class="benefits__check">&#x2726;</span> Promocion internacional del vino boliviano</li>
+                        <li><span class="benefits__check">&#x2726;</span> Promocion internacional del vino boliviano
+                        </li>
                         <li><span class="benefits__check">&#x2726;</span> Datos reales de demanda antes de producir</li>
                     </ul>
                 </div>
@@ -1755,10 +1853,13 @@
                     <h3>Para el Comprador</h3>
                     <ul class="benefits__list">
                         <li><span class="benefits__check">&#x2726;</span> Precio preferencial en pre-venta</li>
-                        <li><span class="benefits__check">&#x2726;</span> Apreciacion de valor por hitos de produccion</li>
-                        <li><span class="benefits__check">&#x2726;</span> Garantia de autenticidad y trazabilidad total</li>
+                        <li><span class="benefits__check">&#x2726;</span> Apreciacion de valor por hitos de produccion
+                        </li>
+                        <li><span class="benefits__check">&#x2726;</span> Garantia de autenticidad y trazabilidad total
+                        </li>
                         <li><span class="benefits__check">&#x2726;</span> Redencion por producto fisico real</li>
-                        <li><span class="benefits__check">&#x2726;</span> Participacion directa en la cadena de valor</li>
+                        <li><span class="benefits__check">&#x2726;</span> Participacion directa en la cadena de valor
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -1952,4 +2053,5 @@
     </script>
 
 </body>
+
 </html>
