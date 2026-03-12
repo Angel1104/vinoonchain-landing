@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRINKS ON CHAIN</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- 1. NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">DRINKS ON CHAIN</div>
+    <ul class="nav-links">
+      <li><a href="#proyecto">Proyecto</a></li>
+      <li><a href="#funciona">Cómo Funciona</a></li>
+      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a href="#trazabilidad">Trazabilidad</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#preventa" class="btn btn-primary cta-nav">Únete a la Pre-Venta</a>
+    <button class="mobile-menu-btn">MENU</button>
+  </nav>
+
+  <!-- 2. HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="uppercase-label hero-label gsap-fade-up">Real World Assets · Stellar Network</div>
+      <h1 class="serif gsap-fade-up">El Vino Ahora Vive<br>en la Blockchain</h1>
+      <p class="hero-subtitle gsap-fade-up">Compra tokens que representan botellas reales de vino boliviano. Financia la producción. Observa cómo crece su valor. Redime tu botella.</p>
+      
+      <div class="hero-ctas gsap-fade-up">
+        <a href="#preventa" class="btn btn-primary">Explorar Pre-Venta &rarr;</a>
+        <a href="#funciona" class="btn btn-secondary">Ver Cómo Funciona &rarr;</a>
+      </div>
+
+      <div class="hero-stats gsap-fade-up">
+        <div class="hero-stat-item">
+          <p>Red</p>
+          <p>Stellar Network</p>
+        </div>
+        <div class="hero-stat-item">
+          <p>Activo</p>
+          <p>1 Token = 1 Botella</p>
+        </div>
+        <div class="hero-stat-item">
+          <p>Origen</p>
+          <p>Samaipata, Bolivia</p>
+        </div>
+        <div class="hero-stat-item">
+          <p>Modelo</p>
+          <p>Non-Custodial</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROBLEMA -->
+  <section class="section bg-light" id="proyecto">
+    <div class="container">
+      <div class="uppercase-label margin-x-auto text-center gsap-fade-up" style="color: var(--primary-dark)">El Problema</div>
+      <h2 class="text-center serif gsap-fade-up" style="color: var(--primary-dark)">El 80% de los pequeños viñedos<br>no acceden a financiamiento temprano</h2>
+      
+      <div class="problem-grid">
+        <div class="gsap-fade-up">
+          <h4 style="color: var(--primary-dark)">Para el Productor</h4>
+          <p>Los viñedos pequeños y medianos en Bolivia dependen de intermediarios, enfrentan costos financieros altos y no pueden vender su producción antes de embotellar. Esto limita su crecimiento y los deja vulnerables ante cada temporada.</p>
+        </div>
+        <div class="gsap-fade-up">
+          <h4 style="color: var(--primary-dark)">Para el Consumidor</h4>
+          <p>Los consumidores pagan el precio final sin beneficiarse de la apreciación del producto. No pueden verificar el origen, el proceso de producción ni la autenticidad de lo que compran. La cadena de valor es opaca.</p>
+        </div>
+      </div>
+
+      <div class="problem-cards">
+        <div class="problem-card gsap-fade-up">
+          <span class="icon">FIN</span>
+          <h4>Sin financiamiento</h4>
+          <p>Los viñedos no acceden a capital antes de la cosecha</p>
+        </div>
+        <div class="problem-card gsap-fade-up">
+          <span class="icon">RED</span>
+          <h4>Intermediarios</h4>
+          <p>Múltiples intermediarios encarecen el producto final</p>
+        </div>
+        <div class="problem-card gsap-fade-up">
+          <span class="icon">INFO</span>
+          <h4>Sin transparencia</h4>
+          <p>El consumidor no puede verificar origen ni autenticidad</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; text-align: center" class="gsap-fade-up">
+        <img src="assets/images/problem_split_1773283494195.png" alt="Problema visual" style="max-width: 100%; border-radius: 8px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SOLUCIÓN -->
+  <section class="section bg-dark" id="solucion">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--accent-gold)">La Solución</div>
+      <h2 class="text-center serif gsap-fade-up">Tokenizamos Cada Botella<br>en la Red Stellar</h2>
+      <p class="text-center margin-x-auto gsap-fade-up" style="color: var(--light-neutral)">DRINKS ON CHAIN convierte botellas reales de vino en activos digitales sobre la blockchain de Stellar. Cada token es respaldado 1:1 por una botella producida por Viñedo 1970 en Samaipata, Bolivia.</p>
+
+      <div class="solution-content">
+        <div class="solution-image gsap-fade-up">
+          <img src="assets/images/solution_bottle_1773283508261.png" alt="Wine bottle tokenized">
+        </div>
+        <div class="solution-cards">
+          <div class="glass-card solution-card-inner gsap-fade-up">
+            <span class="icon">TOK</span>
+            <div>
+              <h4>Pre-Venta Tokenizada</h4>
+              <p>Compra tokens durante la fase de producción a precio preferencial. Financia directamente al viñedo sin intermediarios.</p>
+            </div>
+          </div>
+          <div class="glass-card solution-card-inner gsap-fade-up">
+            <span class="icon">QR</span>
+            <div>
+              <h4>Trazabilidad On-Chain</h4>
+              <p>Cada botella tiene un QR que enlaza a su historial completo en Stellar: origen, producción, transferencias y autenticidad.</p>
+            </div>
+          </div>
+          <div class="glass-card solution-card-inner gsap-fade-up">
+            <span class="icon">VIN</span>
+            <div>
+              <h4>Redención Real</h4>
+              <p>Cuando estés listo, canjea tu token por una botella física en el viñedo o puntos autorizados. El token se retira de circulación.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CÓMO FUNCIONA -->
+  <section class="section bg-light" id="funciona">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--primary-dark)">Cómo Funciona</div>
+      <h2 class="text-center serif gsap-fade-up" style="color: var(--primary-dark)">De la Cepa a Tu Wallet<br>en 5 Pasos</h2>
+
+      <div class="timeline">
+        <div class="timeline-item gsap-fade-up">
+          <div class="timeline-icon">1</div>
+          <div class="timeline-content">
+            <h4>El Viñedo Emite el Activo</h4>
+            <p>Viñedo 1970 crea un activo nativo en Stellar. Cada token representa una botella real de vino en producción.</p>
+            <div class="timeline-tech-detail">Detalle técnico: Asset nativo Stellar con cuenta issuer + distributor</div>
+          </div>
+        </div>
+        <div class="timeline-item gsap-fade-up">
+          <div class="timeline-icon">2</div>
+          <div class="timeline-content">
+            <h4>Compra en Pre-Venta</h4>
+            <p>Adquiere tokens a precio preferencial usando USDC. Tu compra financia directamente la producción y embotellado.</p>
+            <div class="timeline-tech-detail">Detalle técnico: Pago asegurado con escrow vía Trustless Work SDK</div>
+          </div>
+        </div>
+        <div class="timeline-item gsap-fade-up">
+          <div class="timeline-icon">3</div>
+          <div class="timeline-content">
+            <h4>Tu Token Gana Valor</h4>
+            <p>A medida que avanza la producción, el valor de referencia de tu token aumenta por hitos completados.</p>
+            <div class="timeline-tech-detail">Detalle: +20% al embotellar &middot; +10% al inicio de ventas oficiales</div>
+          </div>
+        </div>
+        <div class="timeline-item gsap-fade-up">
+          <div class="timeline-icon">4</div>
+          <div class="timeline-content">
+            <h4>Canjea Tu Botella</h4>
+            <p>Presenta tu token en el viñedo o un punto autorizado. Recibes tu botella física y el token se quema (sale de circulación).</p>
+            <div class="timeline-tech-detail">Detalle técnico: Burn transaction verificable en Stellar</div>
+          </div>
+        </div>
+        <div class="timeline-item gsap-fade-up">
+          <div class="timeline-icon">5</div>
+          <div class="timeline-content">
+            <h4>Escanea y Verifica</h4>
+            <p>Cada botella incluye un código QR. Escanéalo para ver el historial completo: hash de transacción, metadata y cadena de transferencias.</p>
+            <div class="timeline-tech-detail">Detalle técnico: Enlace directo a Stellar Explorer + metadata on-chain</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center;" class="gsap-fade-up">
+        <img src="assets/images/how_it_works_1773283533504.png" alt="Flow infography" style="max-width: 100%; border-radius: 8px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. VALOR / STATS -->
+  <section class="section bg-burgundy">
+    <div class="container text-center">
+      <h2 class="serif gsap-fade-up">Números que Hablan</h2>
+      
+      <div class="stats-grid">
+        <div class="gsap-fade-up">
+          <span class="stat-number" data-val="1">1:1</span>
+          <span class="stat-label">Cada Token = 1 Botella Real</span>
+        </div>
+        <div class="gsap-fade-up">
+          <span class="stat-number" data-val="30">+30%</span>
+          <span class="stat-label">Apreciación Potencial por Ciclo</span>
+        </div>
+        <div class="gsap-fade-up">
+          <span class="stat-number" data-val="0">0</span>
+          <span class="stat-label">Intermediarios en la Cadena</span>
+        </div>
+        <div class="gsap-fade-up">
+          <span class="stat-number" data-val="100">100%</span>
+          <span class="stat-label">Trazable desde la Cepa</span>
+        </div>
+      </div>
+      
+      <p class="margin-x-auto gsap-fade-up" style="color: var(--light-neutral)">Cada transacción es verificable en la blockchain de Stellar.<br>Sin custodia de terceros. Sin opacidad. Sin letra pequeña.</p>
+    </div>
+  </section>
+
+  <!-- 7. EL ORIGEN -->
+  <section class="section bg-light" id="origen">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--primary-dark)">El Origen</div>
+      <h2 class="text-center serif gsap-fade-up" style="color: var(--primary-dark)">Viñedo 1970<br>Samaipata, Bolivia</h2>
+      
+      <div class="origin-content">
+        <div class="gsap-fade-up" style="color: var(--text-dark)">
+          <p>Enclavado en los valles de Samaipata, a 1.750 metros sobre el nivel del mar, Viñedo 1970 produce vino artesanal con uvas cultivadas en uno de los terroirs más singulares de Sudamérica.</p>
+          <p>Con décadas de tradición vinícola, el viñedo combina métodos ancestrales con innovación. DRINKS ON CHAIN es el puente entre esa tradición y la tecnología blockchain, permitiendo que el mundo participe directamente en cada cosecha.</p>
+          <p>Este proyecto nace para demostrar que la tokenización de activos reales no es solo teoría: es una herramienta concreta para financiar, transparentar y democratizar el acceso a productos con denominación de origen.</p>
+          
+          <div class="origin-data">
+            <div class="origin-data-grid">
+              <div class="data-item">
+                <span>Ubicación</span>
+                <strong>Samaipata, Santa Cruz, Bolivia</strong>
+              </div>
+              <div class="data-item">
+                <span>Altitud</span>
+                <strong>1.750 msnm</strong>
+              </div>
+              <div class="data-item">
+                <span>Producto</span>
+                <strong>Vino artesanal de altura</strong>
+              </div>
+              <div class="data-item">
+                <span>Tradición</span>
+                <strong>Décadas de producción vinícola</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="origin-images gsap-fade-up">
+          <img src="assets/images/vineyard_pano_1773283547052.png" alt="Samaipata valley">
+          <img src="assets/images/vineyard_hands_1773283570399.png" alt="Harvest grapes">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. TECNOLOGÍA -->
+  <section class="section bg-dark" id="tecnologia">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--accent-gold)">Tecnología</div>
+      <h2 class="text-center serif gsap-fade-up">Construido Sobre Stellar.<br>Seguro por Diseño.</h2>
+      <p class="text-center margin-x-auto gsap-fade-up" style="color: var(--light-neutral)">Usamos la infraestructura de Stellar Network porque ofrece transacciones rápidas, de bajo costo y con el estándar de seguridad que los activos reales requieren.</p>
+      
+      <div class="tech-grid">
+        <div class="glass-card tech-card gsap-fade-up">
+          <span style="font-size: 2rem; margin-bottom: 1rem; display: block">RAP</span>
+          <h4>Assets Nativos de Stellar</h4>
+          <p>Los tokens son activos nativos de la red, no smart contracts complejos. Esto garantiza velocidad, bajo costo y compatibilidad con todo el ecosistema Stellar.</p>
+        </div>
+        <div class="glass-card tech-card gsap-fade-up">
+          <span style="font-size: 2rem; margin-bottom: 1rem; display: block">KEY</span>
+          <h4>Non-Custodial</h4>
+          <p>Nunca tocamos tus llaves privadas. El backend construye la transacción (XDR), pero solo tú firmas desde tu wallet personal (Freighter, Lobstr o Albedo).</p>
+        </div>
+        <div class="glass-card tech-card gsap-fade-up">
+          <span style="font-size: 2rem; margin-bottom: 1rem; display: block">SEG</span>
+          <h4>Escrow Verificable</h4>
+          <p>Los pagos de pre-venta están asegurados mediante Trustless Work SDK. Fondos liberados por hitos verificables, no por confianza ciega.</p>
+        </div>
+        <div class="glass-card tech-card gsap-fade-up">
+          <span style="font-size: 2rem; margin-bottom: 1rem; display: block">DAT</span>
+          <h4>Metadata On-Chain</h4>
+          <p>Cada activo incluye metadata vinculada: varietal, cosecha, lote, proceso de producción. Todo verificable y público siguiendo estándares SEP-1.</p>
+        </div>
+      </div>
+      
+      <div class="wallets-container gsap-fade-up">
+        <p>Wallets compatibles</p>
+        <div class="wallets">
+          <span>Freighter</span> &middot; <span>Lobstr</span> &middot; <span>Albedo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. BENEFICIOS -->
+  <section class="section bg-light" id="beneficios">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--primary-dark)">Beneficios</div>
+      <h2 class="text-center serif gsap-fade-up" style="color: var(--primary-dark)">Ganan Todos</h2>
+      
+      <div class="benefits-grid">
+        <div class="benefit-column gsap-fade-up">
+          <h3>Para el Productor (Viñedo)</h3>
+          <ul class="benefit-list" style="color: var(--text-dark)">
+            <li>Financiamiento antes de la cosecha, sin deuda</li>
+            <li>Eliminación de intermediarios</li>
+            <li>Relación directa con el consumidor final</li>
+            <li>Promoción internacional del vino boliviano</li>
+            <li>Datos reales de demanda antes de producir</li>
+          </ul>
+        </div>
+        <div class="benefit-column gsap-fade-up">
+          <h3>Para el Comprador (Consumidor/Inversor)</h3>
+          <ul class="benefit-list" style="color: var(--text-dark)">
+            <li>Precio preferencial en pre-venta</li>
+            <li>Apreciación de valor por hitos de producción</li>
+            <li>Garantía de autenticidad y trazabilidad total</li>
+            <li>Redención por producto físico real</li>
+            <li>Participación directa en la cadena de valor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. VISIÓN / ROADMAP -->
+  <section class="section bg-dark" id="vision">
+    <div class="container">
+      <div class="uppercase-label text-center gsap-fade-up" style="color: var(--accent-gold)">Visión</div>
+      <h2 class="text-center serif gsap-fade-up">Más Allá del Vino</h2>
+      <p class="text-center margin-x-auto gsap-fade-up" style="color: var(--light-neutral)">El modelo de DRINKS ON CHAIN es replicable. Cualquier producto con denominación de origen puede beneficiarse de la tokenización.</p>
+      
+      <div class="vision-grid">
+        <div class="vision-card gsap-fade-up">
+          <span class="icon">CAF</span>
+          <h4>Café de Especialidad</h4>
+          <p>Yungas, Bolivia</p>
+        </div>
+        <div class="vision-card gsap-fade-up">
+          <span class="icon">CAC</span>
+          <h4>Cacao Orgánico</h4>
+          <p>Alto Beni, Bolivia</p>
+        </div>
+        <div class="vision-card gsap-fade-up">
+          <span class="icon">ORG</span>
+          <h4>Productos con D.O.</h4>
+          <p>Cualquier origen verificable</p>
+        </div>
+      </div>
+      
+      <p class="text-center margin-x-auto gsap-fade-up" style="margin-top: 4rem; max-width: 600px; color: var(--light-neutral)">
+        DRINKS ON CHAIN es una infraestructura, no solo un producto. Estamos construyendo el puente entre los productos reales de Latinoamérica y la economía digital global.
+      </p>
+    </div>
+  </section>
+
+  <!-- 11. CTA FINAL -->
+  <section class="final-cta" id="preventa">
+    <div class="container">
+      <h2 class="serif gsap-fade-up">Sé Parte de la Primera Cosecha Tokenizada de Bolivia</h2>
+      <p class="hero-subtitle gsap-fade-up">La pre-venta tiene cupo limitado. Cada token es una botella real, y cada cosecha es única.</p>
+      
+      <div class="cta-buttons gsap-fade-up">
+        <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 18px 40px;">Reservar Mis Tokens &rarr;</a>
+        <a href="#" class="btn btn-secondary" style="font-size: 1.1rem; padding: 18px 40px;">Hablar con el Equipo</a>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 12. FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand gsap-fade-up">
+          <h3>DRINKS ON CHAIN</h3>
+          <p style="opacity: 0.6; font-size: 0.9rem;">Tokenizando la riqueza real boliviana en la red Stellar.</p>
+        </div>
+        <div class="footer-col gsap-fade-up">
+          <h4>Proyecto</h4>
+          <ul>
+            <li><a href="#funciona">Cómo Funciona</a></li>
+            <li><a href="#beneficios">Beneficios</a></li>
+            <li><a href="#tecnologia">Tecnología</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+          </ul>
+        </div>
+        <div class="footer-col gsap-fade-up">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">Whitepaper (próximamente)</a></li>
+            <li><a href="#">Documentación Técnica</a></li>
+            <li><a href="#">Stellar Network</a></li>
+            <li><a href="#">Trustless Work</a></li>
+          </ul>
+        </div>
+        <div class="footer-col gsap-fade-up">
+          <h4>Comunidad</h4>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">Discord (próximamente)</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom gsap-fade-up">
+        <p>&copy; 2026 DRINKS ON CHAIN &middot; Samaipata, Bolivia</p>
+        <p>Construido sobre Stellar Network</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="language-switcher" aria-label="Language switcher">
+    <span class="language-switcher-label">Idioma</span>
+    <div class="language-switcher-buttons">
+      <button type="button" class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
